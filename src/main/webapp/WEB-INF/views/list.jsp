@@ -117,9 +117,7 @@
             </div>
             <div class="col-md-6">
                 <ul class="pager">
-                    <c:if test="${pages.navigateFirstPage >0}">
-                        <li ><a href="show?pNum=1" aria-label="Previous"><span aria-hidden="true">首页</span></a></li>
-                    </c:if>
+                    <li ><a href="show?pNum=1" aria-label="Previous"><span aria-hidden="true">首页</span></a></li>
                     <c:forEach items="${pages.navigatepageNums}" var="navNums">
                         <li ><a href="show?pNum=${navNums}">${navNums}<span class="sr-only">(current)</span></a></li>
                     </c:forEach>
