@@ -19,14 +19,14 @@ public class StudentHandler {
     @Autowired
     private GradeServiceImpl gradeService;
 
-    @ModelAttribute
-    public void Student(Model model){
-        model.addAttribute("student", new Student());
-    }
+//    @ModelAttribute
+//    public void Student(Model model){
+//        model.addAttribute("student", new Student());
+//    }
 
-    @RequestMapping(value = "/shows")
+    @RequestMapping(value = "/shows",method = RequestMethod.GET)
     public String showStudent(@RequestParam(value = "pNum",defaultValue = "1")Integer pNum, Model model){
-        PageHelper.startPage(pNum, 10);
+        PageHelper.startPage(pNum, 15);
         List<Student> students = studentService.getList();
         PageInfo<Student> pageInfo = new PageInfo <>(students,10);
         model.addAttribute("pages", pageInfo);

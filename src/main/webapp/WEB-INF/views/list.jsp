@@ -34,7 +34,7 @@
                             <h4 class="modal-title" id="myModalLabel">添加信息</h4>
                         </div>
                         <div class="modal-body">
-                            <form:form action="show" method="post" modelAttribute="student">
+                            <%--<form:form action="show" method="post" modelAttribute="student">
                                 <form:label path="stuName">学生姓名</form:label>
                                 <form:input path="stuName"></form:input>
                                 <form:errors path="stuName"></form:errors>
@@ -48,9 +48,9 @@
                                 <form:errors path="stuAge"></form:errors>
 
                                 <form:label path="stuSex">性别</form:label>
-                                <%--<form:radiobuttons path="stuSex" items="${student.stuSex}"></form:radiobuttons>--%>
-                                <%--<form:radiobutton path="stuSex" value="F" >男</form:radiobutton>
-                                <form:radiobutton path="stuSex" value="M">女</form:radiobutton>--%>
+                                &lt;%&ndash;<form:radiobuttons path="stuSex" items="${student.stuSex}"></form:radiobuttons>&ndash;%&gt;
+                                &lt;%&ndash;<form:radiobutton path="stuSex" value="F" >男</form:radiobutton>
+                                <form:radiobutton path="stuSex" value="M">女</form:radiobutton>&ndash;%&gt;
 
                                 <form:label path="stuBirthday">生日</form:label>
                                 <form:input path="stuBirthday"></form:input>
@@ -60,11 +60,11 @@
                                 <form:select path="grId" items="${student.grId}"
                                              itemValue="cgId" itemLabel="cgName">
                                 </form:select>
-                                <%--<form:select path="grId" items="">
+                                &lt;%&ndash;<form:select path="grId" items="">
                                     <form:option value=""></form:option>
-                                </form:select>--%>
+                                </form:select>&ndash;%&gt;
 
-                            </form:form>
+                            </form:form>--%>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -112,16 +112,16 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-6 allHeight">
+            <div class="col-md-4 allHeight">
                 <p>总共${pages.pages}页/当前${pages.pageNum}页</p>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <ul class="pager">
-                    <li ><a href="show?pNum=1" aria-label="Previous"><span aria-hidden="true">首页</span></a></li>
+                    <li ><a href="shows?pNum=1" aria-label="Previous"><span aria-hidden="true">首页</span></a></li>
                     <c:forEach items="${pages.navigatepageNums}" var="navNums">
-                        <li ><a href="show?pNum=${navNums}">${navNums}<span class="sr-only">(current)</span></a></li>
+                        <li ><a href="shows?pNum=${navNums}">${navNums}<span class="sr-only">(current)</span></a></li>
                     </c:forEach>
-                    <li ><a href="show?pNum=${pages.pages}" aria-label="Previous"><span aria-hidden="true">尾页</span></a></li>
+                    <li ><a href="shows?pNum=${pages.pages}" aria-label="Previous"><span aria-hidden="true">尾页</span></a></li>
                 </ul>
             </div>
         </div>
