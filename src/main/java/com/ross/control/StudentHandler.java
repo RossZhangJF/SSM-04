@@ -28,7 +28,7 @@ public class StudentHandler {
     public String showStudent(@RequestParam(value = "pNum",defaultValue = "1")Integer pNum, Model model){
         PageHelper.startPage(pNum, 10);
         List<Student> students = studentService.getList();
-        PageInfo<Student> pageInfo = new PageInfo <>(students,5);
+        PageInfo<Student> pageInfo = new PageInfo <>(students,10);
         model.addAttribute("pages", pageInfo);
         System.out.println(pageInfo);
         return "list";
