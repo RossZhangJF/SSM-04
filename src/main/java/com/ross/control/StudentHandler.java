@@ -25,8 +25,8 @@ public class StudentHandler {
     }
 
     @RequestMapping(value = "/shows")
-    public String showStudent(@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum, Model model){
-        PageHelper.startPage(pageNum, 10);
+    public String showStudent(@RequestParam(value = "pNum",defaultValue = "1")Integer pNum, Model model){
+        PageHelper.startPage(pNum, 10);
         List<Student> students = studentService.getList();
         PageInfo<Student> pageInfo = new PageInfo <>(students,5);
         model.addAttribute("pages", pageInfo);
@@ -34,9 +34,4 @@ public class StudentHandler {
         return "list";
     }
 
-    @RequestMapping(value = "/show",method = RequestMethod.POST)
-    public String pageShowStudent( Student student){
-        studentService.insertStudent(student);
-        return "redirect:/shows";
-    }
 }
