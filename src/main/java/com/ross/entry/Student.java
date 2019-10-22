@@ -1,6 +1,10 @@
 package com.ross.entry;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
+import java.util.List;
 
 public class Student {
     private Integer stuId;
@@ -13,9 +17,15 @@ public class Student {
 
     private String stuSex;
 
+    @Autowired
+    private List<Grade> grade;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date stuBirthday;
 
     private Integer grId;
+
+    private Integer pages;
 
     public Integer getStuId() {
         return stuId;
@@ -71,6 +81,14 @@ public class Student {
 
     public void setGrId(Integer grId) {
         this.grId = grId;
+    }
+
+    public Integer getPages() {
+        return pages;
+    }
+
+    public void setPages(Integer pages) {
+        this.pages = pages;
     }
 
     public Student() {

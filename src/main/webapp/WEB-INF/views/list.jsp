@@ -1,3 +1,5 @@
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
@@ -15,67 +17,33 @@
     <style>
         .allHeight{height:72px;}
         .allHeight p{margin:20px 0px;height:32px;}
+        .error{color:red;}
     </style>
+    <script type="text/javascript">
+        $(function(){
+            $(".delete").click(function(){
+                console.log(44444);
+                var href=$(this).attr("href");
+                $("form").attr("action",href).submit();
+                return false;
+            })
+        })
+    </script>
 </head>
 <body>
     <div class="container">
         <div class=""><h1>学生信息</h1></div>
         <div class="col-md-8 col-md-offset-9">
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            <a href="showGrade" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true">新增学生信息</span>
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">添加信息</h4>
-                        </div>
-                        <div class="modal-body">
-                            <%--<form:form action="show" method="post" modelAttribute="student">
-                                <form:label path="stuName">学生姓名</form:label>
-                                <form:input path="stuName"></form:input>
-                                <form:errors path="stuName"></form:errors>
-
-                                <form:label path="stuPwd">学生密码</form:label>
-                                <form:password path="stuPwd"></form:password>
-                                <form:errors path="stuPwd"></form:errors>
-
-                                <form:label path="stuAge">年龄</form:label>
-                                <form:input path="stuAge"></form:input>
-                                <form:errors path="stuAge"></form:errors>
-
-                                <form:label path="stuSex">性别</form:label>
-                                &lt;%&ndash;<form:radiobuttons path="stuSex" items="${student.stuSex}"></form:radiobuttons>&ndash;%&gt;
-                                &lt;%&ndash;<form:radiobutton path="stuSex" value="F" >男</form:radiobutton>
-                                <form:radiobutton path="stuSex" value="M">女</form:radiobutton>&ndash;%&gt;
-
-                                <form:label path="stuBirthday">生日</form:label>
-                                <form:input path="stuBirthday"></form:input>
-                                <form:errors path="stuBirthday"></form:errors>
-
-                                <form:label path="grId">班级</form:label>
-                                <form:select path="grId" items="${student.grId}"
-                                             itemValue="cgId" itemLabel="cgName">
-                                </form:select>
-                                &lt;%&ndash;<form:select path="grId" items="">
-                                    <form:option value=""></form:option>
-                                </form:select>&ndash;%&gt;
-
-                            </form:form>--%>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                            <button type="button" class="btn btn-primary">保存</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </a>
+            <jsp:include page="common/input.jsp"></jsp:include>
         </div>
         <div class="lead">
             <table class="table table-hover ">
+                <form method="post">
+                    <input type="hidden" value="DELETE" name="_method">
+                </form>
                 <tr class="">
                     <th>学生编号</th>
                     <th>姓名</th>
@@ -91,22 +59,23 @@
                         <td><span>${stu.stuId}</span></td>
                         <td><span>${stu.stuName}</span></td>
                         <td><span>${stu.stuAge}</span></td>
-                        <td><span>${stu.stuSex}</span></td>
+                        <td><span>${stu.stuSex=="F"?"男":"女"}</span></td>
                         <td><span>${stu.stuBirthday}</span></td>
                         <td><span>${stu.grId}</span></td>
                         <td>
-                            <button class="btn bg-info btn-xs" aria-label="Left Align">
-                            <span class="glyphicon glyphicon-pencil" aria-hidden="true">编辑</span>
-                            </button>
+                            <a href="editStu?stuId=${stu.stuId}" class="btn bg-info btn-sm" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true">编辑</span>
+                            </a>
                         </td>
                         <td>
-                            <button class="btn bg-danger btn-xs" aria-label="Left Align">
+                            <a href="deleteStu?stuId=${stu.stuId}" class="delete btn bg-danger btn-sm" aria-label="Left Align">
                                 <span class="glyphicon glyphicon-trash" aria-hidden="true">删除</span>
-                            </button>
+                            </a>
                         </td>
                     </tr>
                 </c:forEach>
             </table>
+
         </div>
     </div>
 

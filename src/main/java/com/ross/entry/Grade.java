@@ -1,5 +1,8 @@
 package com.ross.entry;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Grade {
     private Integer grId;
 

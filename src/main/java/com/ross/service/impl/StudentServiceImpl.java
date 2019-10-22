@@ -43,4 +43,14 @@ public class StudentServiceImpl implements StudentService {
 
         return page;
     }
+
+    @Override
+    public int updateStudent(Student student) {
+        return studentMapper.updateByPrimaryKeySelective(student);
+    }
+
+    @Override
+    public int deleteStudentById(Integer stuId) {
+        return studentMapper.deleteByPrimaryKey(stuId);
+    }
 }
