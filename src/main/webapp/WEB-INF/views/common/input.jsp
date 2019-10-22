@@ -2,6 +2,10 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<style>
+    .allHeight p{margin:20px 0px;height:32px;}
+    .error{color:red;}
+</style>
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -17,37 +21,26 @@
                 request.setAttribute("sex",sex);
             %>
             <form:form action="inputStu?pNum=${pages.pages}" method="post" modelAttribute="student">
-                <%--                            <form:hidden path="${pages.pages}"></form:hidden>--%>
                 <div class="modal-body">
                     <table>
                         <tr>
                             <td><form:label path="stuName">学生姓名</form:label></td>
                             <td><form:input path="stuName" cssClass="form-control"></form:input></td>
-                            <td><form:errors path="stuName" cssClass="error"></form:errors></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td><form:label path="stuPwd">学生密码</form:label></td>
                             <td><form:password path="stuPwd" cssClass="form-control"></form:password></td>
-                            <td><form:errors path="stuPwd" cssClass="error"></form:errors></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td><form:label path="stuAge">年龄</form:label></td>
-                            <td>
-                                    <%--<div class="input-group">
-                                        <span class="input-group-addon">@</span>
-                                        <form:input path="stuAge" cssClass="form-control" ></form:input>
-                                    </div>--%>
-                                <form:input path="stuAge" cssClass="form-control" ></form:input>
-                            </td>
-                            <td><form:errors path="stuAge" cssClass="error"></form:errors></td>
+                            <td><form:input path="stuAge" cssClass="form-control" ></form:input>                            </td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td><form:label path="stuSex">性别</form:label></td>
-                            <td>
-                                <form:radiobuttons path="stuSex" items="${sex}" ></form:radiobuttons>
-                                    <%--<form:radiobutton path="stuSex" value="F" checked="true">男</form:radiobutton>
-                                    <form:radiobutton path="stuSex" value="M">女</form:radiobutton>--%>
-                            </td>
+                            <td><form:radiobuttons path="stuSex" items="${sex}" ></form:radiobuttons></td>
                             <td></td>
                         </tr>
                         <tr>

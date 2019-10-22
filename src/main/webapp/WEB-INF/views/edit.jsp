@@ -13,6 +13,9 @@
 <head>
     <title>Title</title>
     <jsp:include page="common/js.jsp"></jsp:include>
+    <style>
+        .error{color:red;}
+    </style>
 </head>
 <body>
 <%
@@ -36,37 +39,49 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <form:label path="stuName" cssClass="col-sm-2 control-label" >学生姓名</form:label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-6">
                             <form:input path="stuName"  cssClass="form-control"></form:input>
+                        </div>
+                        <div class="col-sm-2">
+                            <form:errors path="stuName"  cssClass="error"></form:errors>
                         </div>
                     </div>
                     <div class="form-group">
                         <form:label path="stuPwd" cssClass="col-sm-2 control-label">学生密码</form:label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-6">
                             <form:password path="stuPwd" cssClass="form-control"></form:password>
+                        </div>
+                        <div class="col-sm-2">
+                            <form:errors path="stuPwd" cssClass="error"></form:errors>
                         </div>
                     </div>
                     <div class="form-group">
                         <form:label path="stuAge" cssClass="col-sm-2 control-label">年龄</form:label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-6">
                             <form:input path="stuAge" cssClass="form-control" ></form:input>
+                        </div>
+                        <div class="col-sm-2">
+                            <form:errors path="stuAge" cssClass="error" ></form:errors>
                         </div>
                     </div>
                     <div class="form-group">
                         <form:label path="stuSex" cssClass="col-sm-2 control-label">性别</form:label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-6">
                             <form:radiobuttons path="stuSex" items="${sex}" ></form:radiobuttons>
                         </div>
                     </div>
                     <div class="form-group">
                         <form:label path="stuBirthday" cssClass="col-sm-2 control-label">生日</form:label>
-                        <div class="col-sm-10">
-                            <form:input path="stuBirthday"></form:input>
+                        <div class="col-sm-6">
+                            <form:input path="stuBirthday" id="stuBir" cssClass="form-control"></form:input>
+                        </div>
+                        <div class="col-sm-2">
+                            <span id="error-birthday" class="error"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <form:label path="grId" cssClass="col-sm-2 control-label">班级</form:label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-6">
                             <form:select path="grId" items="${grade}" itemValue="grId" itemLabel="grName"></form:select>
                         </div>
                     </div>
@@ -80,5 +95,11 @@
         </div>
     </div>
 </div>
+<script>
+    $(function() {
+        var stuBir=$("#stuBir").val();
+        console.log("123:"+stuBir);
+    });
+</script>
 </body>
 </html>

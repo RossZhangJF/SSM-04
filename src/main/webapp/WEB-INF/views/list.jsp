@@ -1,7 +1,6 @@
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.HashMap" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   User: Ross
   Date: 2019/10/18
@@ -14,11 +13,7 @@
     <link href="static/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="static/jQuery/jquery-3.0.0.min.js"></script>
     <script src="static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-    <style>
-        .allHeight{height:72px;}
-        .allHeight p{margin:20px 0px;height:32px;}
-        .error{color:red;}
-    </style>
+
     <script type="text/javascript">
         $(function (){
             $(".delete").click(function(){
@@ -32,8 +27,6 @@
                 }
             })
         });
-        //AJAX请求
-
     </script>
 </head>
 <body>
@@ -66,7 +59,7 @@
                         <td><span>${stu.stuName}</span></td>
                         <td><span>${stu.stuAge}</span></td>
                         <td><span>${stu.stuSex=="F"?"男":"女"}</span></td>
-                        <td><span>${stu.stuBirthday}</span></td>
+                        <td><span><fmt:formatDate value="${stu.stuBirthday}" pattern="yyyy-MM-dd" /></span></td>
                         <td><span>${stu.grade.grName}</span></td>
                         <td>
                             <a href="editStu?stuId=${stu.stuId}" id="edit_href" class="btn bg-info btn-sm" aria-label="Left Align">
@@ -81,7 +74,6 @@
                     </tr>
                 </c:forEach>
             </table>
-
         </div>
     </div>
 

@@ -1,18 +1,23 @@
 package com.ross.entry;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.*;
 import java.util.Date;
-import java.util.List;
 
 public class Student {
     private Integer stuId;
 
+    @NotEmpty
     private String stuName;
 
+    @NotEmpty
+    @Size(min = 6,max = 20,message = "密码长度只能在6-20之间")
     private String stuPwd;
 
+    @Max(value = 200,message = "年龄不能大于200岁")
+    @Min(value = 1,message = "年龄不能小于1岁")
     private Integer stuAge;
 
     private String stuSex;

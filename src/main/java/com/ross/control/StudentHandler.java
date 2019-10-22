@@ -8,8 +8,11 @@ import com.ross.service.impl.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -36,8 +39,8 @@ public class StudentHandler {
      * @return
      */
     @RequestMapping(value = "/inputStu",method = RequestMethod.POST,produces = "text/html;charset=utf-8")
-    public String addStudent(Student student,@RequestParam(value = "pNum")Integer pNum){
-        System.out.println(student);
+    public String addStudent( Student student, @RequestParam(value = "pNum")Integer pNum){
+        System.out.println("Wo shi POST  ,INPUT STU");
         studentService.insertStudent(student);
         return "redirect:/shows?pNum="+pNum;
     }
@@ -48,9 +51,14 @@ public class StudentHandler {
      * @return
      */
     @RequestMapping(value = "/updateStu",method = RequestMethod.POST,produces = "text/html;charset=UTF-8")
-    public String updateStudent(Student student){
-//        Student student= studentService.getById(stuId);
-//        System.out.println(student);
+    public String updateStudent(@Valid Student student,Errors errors){
+        if (errors.hasErrors()){
+            List <FieldError> errorList = errors.getFieldErrors();
+            for (FieldError fieldError : errorList) {
+                System.out.println("field:" + fieldError.getField() + "\terrors:" + fieldError.getDefaultMessage());
+            }
+            return "edit";
+        }
         studentService.updateStudent(student);
         return "redirect:/shows";
     }
