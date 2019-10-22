@@ -16,7 +16,7 @@
                 sex.put("M","女");
                 request.setAttribute("sex",sex);
             %>
-            <form:form action="inputStu" method="post" modelAttribute="student">
+            <form:form action="inputStu?pNum=${pages.pages}" method="post" modelAttribute="student">
                 <%--                            <form:hidden path="${pages.pages}"></form:hidden>--%>
                 <div class="modal-body">
                     <table>

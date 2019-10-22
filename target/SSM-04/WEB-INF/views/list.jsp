@@ -27,7 +27,16 @@
                 $("form").attr("action",href).submit();
                 return false;
             })
-        })
+        });
+
+        //AJAX请求
+        $.ajax({
+            url: "test.html",
+            type: "get",
+            success: function(data){
+                $("#results").append(data);
+            }
+        });
     </script>
 </head>
 <body>
@@ -61,7 +70,7 @@
                         <td><span>${stu.stuAge}</span></td>
                         <td><span>${stu.stuSex=="F"?"男":"女"}</span></td>
                         <td><span>${stu.stuBirthday}</span></td>
-                        <td><span>${stu.grId}</span></td>
+                        <td><span>${stu.grade.grName}</span></td>
                         <td>
                             <a href="editStu?stuId=${stu.stuId}" class="btn bg-info btn-sm" aria-label="Left Align">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true">编辑</span>
@@ -95,6 +104,5 @@
             </div>
         </div>
     </div>
-
 </body>
 </html>

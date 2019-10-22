@@ -5,9 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.ross.entry.Student;
 import com.ross.service.impl.GradeServiceImpl;
 import com.ross.service.impl.StudentServiceImpl;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,10 +36,10 @@ public class StudentHandler {
      * @return
      */
     @RequestMapping(value = "/inputStu",method = RequestMethod.POST,produces = "text/html;charset=UTF-8")
-    public String addStudent(Student student){
+    public String addStudent(Student student,@RequestParam(value = "pNum")Integer pNum){
         System.out.println(student);
         studentService.insertStudent(student);
-        return "redirect:/shows";
+        return "redirect:/shows?pNum="+pNum;
     }
 
     /**
@@ -79,7 +77,8 @@ public class StudentHandler {
     @RequestMapping(value = "/shows",method = RequestMethod.GET)
     public String showStudent(@RequestParam(value = "pNum",defaultValue = "1")Integer pNum, Model model){
         PageHelper.startPage(pNum, 15);
-        List<Student> students = studentService.getList();
+        List<Student> students = studentService.getStudentContainGrade();
+
         PageInfo<Student> pageInfo = new PageInfo <>(students,10);
         model.addAttribute("pages", pageInfo);
 //        System.out.println(pageInfo);

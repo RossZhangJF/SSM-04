@@ -10,6 +10,22 @@
     <result column="stu_birthday" jdbcType="DATE" property="stuBirthday" />
     <result column="gr_id" jdbcType="INTEGER" property="grId" />
   </resultMap>
+  <resultMap id="WithGradeResultMap" type="com.ross.entry.Student">
+    <id column="stu_id" jdbcType="INTEGER" property="stuId" />
+    <result column="stu_name" jdbcType="VARCHAR" property="stuName" />
+    <result column="stu_pwd" jdbcType="VARCHAR" property="stuPwd" />
+    <result column="stu_age" jdbcType="INTEGER" property="stuAge" />
+    <result column="stu_sex" jdbcType="CHAR" property="stuSex" />
+    <result column="stu_birthday" jdbcType="DATE" property="stuBirthday" />
+    <association property="grade" javaType="com.ross.entry.Grade">
+      <id column="gr_id" jdbcType="INTEGER" property="grId"></id>
+      <result column="gr_name" jdbcType="VARCHAR" property="grName"></result>
+    </association>
+    <!--<collection column="grade" property="grId" javaType="com.ross.entry.Grade" resultMap="grade">
+      <result column="gr_id" javaType="INTEGER" property="grId" />
+      <result column="gr_name" javaType="VARCHAR" property="grName" />
+    </collection>-->
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -71,6 +87,9 @@
   <sql id="Base_Column_List">
     stu_id, stu_name, stu_pwd, stu_age, stu_sex, stu_birthday, gr_id
   </sql>
+  <sql id="With_Base_Column_List">
+    stu.stu_id, stu.stu_name, stu.stu_pwd, stu.stu_age, stu.stu_sex, stu.stu_birthday, stu.gr_id,gr.gr_name
+  </sql>
   <select id="selectByExample" parameterType="com.ross.entry.StudentExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -78,6 +97,20 @@
     </if>
     <include refid="Base_Column_List" />
     from student
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectWithLeftByExample" parameterType="com.ross.entry.StudentExample" resultMap="WithGradeResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="With_Base_Column_List" />
+    from student stu left join grade gr on stu.gr_id = gr.gr_id
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>

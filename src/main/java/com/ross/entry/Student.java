@@ -17,8 +17,7 @@ public class Student {
 
     private String stuSex;
 
-    @Autowired
-    private List<Grade> grade;
+    private Grade grade;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date stuBirthday;
@@ -83,6 +82,14 @@ public class Student {
         this.grId = grId;
     }
 
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Grade grade) {
+        this.grade = grade;
+    }
+
     public Integer getPages() {
         return pages;
     }
@@ -112,8 +119,8 @@ public class Student {
                 ", stuPwd='" + stuPwd + '\'' +
                 ", stuAge=" + stuAge +
                 ", stuSex='" + stuSex + '\'' +
+                ", grade=" + grade +
                 ", stuBirthday=" + stuBirthday +
-                ", grId=" + grId +
                 '}';
     }
 }

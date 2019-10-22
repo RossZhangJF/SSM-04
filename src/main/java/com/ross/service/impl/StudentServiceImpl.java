@@ -22,6 +22,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public List <Student> getStudentContainGrade() {
+        return studentMapper.selectWithLeftByExample(null);
+    }
+
+    @Override
     public Student getById(Integer stuId) {
         return studentMapper.selectByPrimaryKey(stuId);
     }
