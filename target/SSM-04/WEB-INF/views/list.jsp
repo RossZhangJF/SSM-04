@@ -7,7 +7,7 @@
   Date: 2019/10/18
   Time: 18:23
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=utf-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
     <title>Title</title>

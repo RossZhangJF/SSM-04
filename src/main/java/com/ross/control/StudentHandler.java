@@ -35,7 +35,7 @@ public class StudentHandler {
      * @param student
      * @return
      */
-    @RequestMapping(value = "/inputStu",method = RequestMethod.POST,produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/inputStu",method = RequestMethod.POST,produces = "text/html;charset=utf-8")
     public String addStudent(Student student,@RequestParam(value = "pNum")Integer pNum){
         System.out.println(student);
         studentService.insertStudent(student);
