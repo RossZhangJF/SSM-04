@@ -16,7 +16,8 @@
 <div class="container-fluid" >
     <div class="row">
         <div class="col-md-12">
-            <iframe class="embed-responsive-item " width="100%" align="top" scrolling="no" src="WEB-INF/views/common/top.jsp"></iframe>
+            <iframe class="embed-responsive-item " width="100%" align="top" scrolling="no" src="WEB-INF/views/common/top.jsp">
+            </iframe>
         </div>
     </div>
     <div class="row">

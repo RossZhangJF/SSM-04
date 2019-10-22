@@ -85,4 +85,8 @@ public class StudentHandler {
         return "list";
     }
 
+    @RequestMapping(value = "/login")
+    public String login(){
+        return "login";
+    }
 }

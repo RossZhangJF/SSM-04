@@ -20,23 +20,31 @@
         .error{color:red;}
     </style>
     <script type="text/javascript">
-        $(function(){
+
+        $(function (){
             $(".delete").click(function(){
-                console.log(44444);
+                if(confirm("是否确认删除，此操作不可逆？")){
+                    console.log("确认");
+                    var href=$(this).attr("href");
+                    $("form").attr("action",href).submit();
+                    return false;
+                }else{
+                    return false;
+                }
+            })
+        });
+        /*
+        $(".delete").click(function(){
+            if(confirm("是否确认删除，此操作不可逆？")){
+                console.log("确认");
                 var href=$(this).attr("href");
                 $("form").attr("action",href).submit();
                 return false;
-            })
-        });
-
-        //AJAX请求
-        $.ajax({
-            url: "test.html",
-            type: "get",
-            success: function(data){
-                $("#results").append(data);
             }
         });
+        */
+        //AJAX请求
+
     </script>
 </head>
 <body>
@@ -72,7 +80,7 @@
                         <td><span>${stu.stuBirthday}</span></td>
                         <td><span>${stu.grade.grName}</span></td>
                         <td>
-                            <a href="editStu?stuId=${stu.stuId}" class="btn bg-info btn-sm" aria-label="Left Align">
+                            <a href="editStu?stuId=${stu.stuId}" id="edit_href" class="btn bg-info btn-sm" aria-label="Left Align">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true">编辑</span>
                             </a>
                         </td>
