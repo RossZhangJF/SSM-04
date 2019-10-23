@@ -96,20 +96,24 @@ public class StudentHandler {
     }
 
     /**
-     *  首页显示学生信息,或者显示搜索到的信息
+     *  首页显示学生信息,显示搜索到的信息
      * @param pNum
      * @param model
      * @return
      */
     @RequestMapping(value = "/shows",method = RequestMethod.GET)
     public String showStudent(@RequestParam(value = "pNum",defaultValue = "1")Integer pNum,
-                              @RequestParam(value = "keyWord",required = false) String keyWord, Model model){
+                              /*RequestParam中设置了可以Word自动是可有可无的*/
+                              @RequestParam(value = "keyWord",required = false) String keyWord,Model model){
         PageHelper.startPage(pNum, 15);
-        List<Student> students = studentService.getStudentContainGrade();
-
+        List<Student> students=null;
+        if (keyWord == null ){
+            students= studentService.getStudentContainGrade();
+        }else{
+            students=studentService.getStudentContainGradeSearch(keyWord);
+        }
         PageInfo<Student> pageInfo = new PageInfo <>(students,10);
         model.addAttribute("pages", pageInfo);
-//        System.out.println(pageInfo);
         return "list";
     }
 

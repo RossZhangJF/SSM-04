@@ -90,7 +90,7 @@
                 <nav aria-label="Page navigation">
                 <ul class="pagination">
                     <li ><a href="shows?pNum=1" aria-label="Previous"><span aria-hidden="true">首页</span></a></li>
-                    <!--循环遍历连续显示的页面，若是当前页就高亮显示，并且没有链接-->
+                    <!--循环遍历显示分页，若是当前页就高亮显示-->
                     <c:forEach items="${pages.navigatepageNums}" var="navNums">
                         <c:if test="${navNums == pages.pageNum}">
                             <li class="active"><a href="#">${navNums}</a></li>
@@ -125,10 +125,15 @@
 
         $("#submit_search").on("click",function(){
             $.ajax({
-                url:"shows?keyWord="+$("#keyWord").val(),
+                url:"shows",
                 type:"GET",
+                data:{"keyWord":$("#keyWord").val()},
+                datatype:"json",
                 success:function(){
-                    console.log($("#keyWord").val());
+                    console.log("查询到数据了");
+                },
+                error:function(){
+                    alert("没有查询的数据");
                 }
             }) ;
         })
