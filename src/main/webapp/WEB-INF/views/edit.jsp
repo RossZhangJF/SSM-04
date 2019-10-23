@@ -12,7 +12,9 @@
 <html>
 <head>
     <title>Title</title>
-    <jsp:include page="common/js.jsp"></jsp:include>
+    <link href="static/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="static/jQuery/jquery-3.0.0.min.js"></script>
+    <script src="static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
     <style>
         .error{color:red;}
     </style>

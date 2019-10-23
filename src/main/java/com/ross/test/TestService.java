@@ -22,6 +22,10 @@ public class TestService {
     private StudentServiceImpl studentService;
 
     @Test
+    public void testListSearch(){
+        List<Student> student=studentService.getStudentContainGradeSearch("39");
+        System.out.println(student.size());
+    }
     public void testPage(){
         PageInfo <Student> pageInfo = studentService.getStudentPage(2, 1, 10);
         System.out.println(pageInfo);

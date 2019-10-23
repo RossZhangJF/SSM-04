@@ -9,6 +9,7 @@ import java.util.List;
 public interface StudentService {
     List<Student> getList();
     List<Student> getStudentContainGrade();
+    List<Student> getStudentContainGradeSearch(@Param("keyWord") String keyWord);
     Student getById(@Param("stuId") Integer stuId);
     int insertStudent(Student student);
     PageInfo <Student> getStudentPage(@Param("stuId")Integer stuId, Integer pageNum, Integer pageSize);

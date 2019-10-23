@@ -2,6 +2,7 @@ package com.ross.test;
 
 import com.ross.dao.StudentMapper;
 import com.ross.entry.Student;
+import com.ross.entry.StudentExample;
 import com.ross.service.impl.StudentServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +23,11 @@ public class TestMapper {
     private StudentMapper studentMapper;
 
     @Test
+    public void testExample(){
+        List<Student> students= studentMapper.selectWithLeftBySearch("Java19 Class");
+        System.out.println(students);
+        System.out.println(students.size());
+    }
     public void test(){
         List<Student> students= studentMapper.selectWithLeftByExample(null);
         System.out.println(students);

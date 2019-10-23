@@ -27,6 +27,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public List <Student> getStudentContainGradeSearch(String kyeWord) {
+        return studentMapper.selectWithLeftBySearch(kyeWord);
+    }
+
+    @Override
     public Student getById(Integer stuId) {
         return studentMapper.selectByPrimaryKey(stuId);
     }

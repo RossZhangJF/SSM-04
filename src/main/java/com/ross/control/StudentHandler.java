@@ -71,8 +71,27 @@ public class StudentHandler {
 
     @RequestMapping(value = "/deleteStu",method = RequestMethod.DELETE)
     public String deleteStudent(@RequestParam(value = "stuId")Integer stuId){
-        System.out.println("My Delete");
+//        System.out.println("My Delete");
         studentService.deleteStudentById(stuId);
+        return "redirect:/shows";
+    }
+
+    /**
+     * 删除全部信息
+     * @param delItems
+     * @return
+     */
+    @RequestMapping(value = "/deleteStuAll")
+    public String deleteStudentAll(@RequestParam(value = "delItems")String delItems){
+//        System.out.println("My Delete ALL");
+        String[] strS=delItems.split(",");
+        int count=0;
+        for (int i=0;i<strS.length;i++){
+            System.out.print(strS[i]+"\t");
+            String str = strS[i];
+            count += studentService.deleteStudentById(Integer.parseInt(str));
+        }
+        System.out.println(count);
         return "redirect:/shows";
     }
 
@@ -96,5 +115,21 @@ public class StudentHandler {
     @RequestMapping(value = "/login")
     public String login(){
         return "login";
+    }
+
+//    @ResponseBody
+    @RequestMapping(value = "/search",method = RequestMethod.GET)
+    public String search(@RequestParam(value = "keyWord") String keyWord,Model model){
+        System.out.println(keyWord);
+        List<Student> students = studentService.getStudentContainGradeSearch(keyWord);
+        if (students.size()>0){
+
+        }
+        System.out.println("student:"+students);
+        PageInfo<Student> pageInfo = new PageInfo <>(students,10);
+        System.out.println(pageInfo);
+        model.addAttribute("pages", students);
+        return "redirect:/shows";
+//        return "forward:/shows";
     }
 }

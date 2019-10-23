@@ -2,6 +2,9 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<link href="static/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<script src="static/jQuery/jquery-3.0.0.min.js"></script>
+<script src="static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
 <style>
     .allHeight p{margin:20px 0px;height:32px;}
     .error{color:red;}

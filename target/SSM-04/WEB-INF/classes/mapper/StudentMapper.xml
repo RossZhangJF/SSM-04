@@ -55,6 +55,8 @@
       </foreach>
     </where>
   </sql>
+  <!--搜索框专用语句-->
+
   <sql id="Update_By_Example_Where_Clause">
     <where>
       <foreach collection="example.oredCriteria" item="criteria" separator="or">
@@ -117,6 +119,19 @@
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
+  </select>
+  <!--搜索语句-->
+  <select id="selectWithLeftBySearch" parameterType="com.ross.entry.Student" resultMap="WithGradeResultMap">
+    select
+    <include refid="With_Base_Column_List" />
+    from student stu left join grade gr on stu.gr_id = gr.gr_id
+    <where>
+      <if test="keyWord !='' ">
+        stu.stu_id like '%' #{keyWord} '%' or stu.stu_age like '%' #{keyWord} '%'
+        or stu.stu_name like '%' #{keyWord} '%' or stu.stu_sex like '%' #{keyWord} '%'
+        or gr.gr_name like '%' #{keyWord} '%'
+      </if>
+    </where>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
