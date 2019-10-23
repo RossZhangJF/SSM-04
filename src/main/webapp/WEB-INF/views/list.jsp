@@ -87,15 +87,24 @@
                 <p>总共${pages.pages}页/当前${pages.pageNum}页</p>
             </div>
             <div class="col-md-8">
-                <ul class="pager">
+                <nav aria-label="Page navigation">
+                <ul class="pagination">
                     <li ><a href="shows?pNum=1" aria-label="Previous"><span aria-hidden="true">首页</span></a></li>
+                    <!--循环遍历连续显示的页面，若是当前页就高亮显示，并且没有链接-->
                     <c:forEach items="${pages.navigatepageNums}" var="navNums">
-                        <li ><a href="shows?pNum=${navNums}">${navNums}<span class="sr-only">(current)</span></a></li>
+                        <c:if test="${navNums == pages.pageNum}">
+                            <li class="active"><a href="#">${navNums}</a></li>
+                        </c:if>
+                        <c:if test="${navNums != pages.pageNum}">
+                            <li><a href="shows?pNum=${navNums}">${navNums}</a></li>
+                        </c:if>
                     </c:forEach>
                     <li ><a href="shows?pNum=${pages.pages}" aria-label="Previous"><span aria-hidden="true">尾页</span></a></li>
                 </ul>
+                </nav>
             </div>
         </div>
+
     </div>
 
     <script type="text/javascript">
@@ -113,17 +122,17 @@
     </script>
 
     <script>
-        /*
+
         $("#submit_search").on("click",function(){
             $.ajax({
-                url:"search?keyWord="+$("#keyWord").val(),
+                url:"shows?keyWord="+$("#keyWord").val(),
                 type:"GET",
                 success:function(){
                     console.log($("#keyWord").val());
                 }
             }) ;
         })
-        */
+
         $(function(){
             //全选，设置checkbox name='all' id=tb
             $("input[name=all]").click(function(){

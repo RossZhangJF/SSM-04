@@ -96,13 +96,14 @@ public class StudentHandler {
     }
 
     /**
-     *  首页显示学生信息
+     *  首页显示学生信息,或者显示搜索到的信息
      * @param pNum
      * @param model
      * @return
      */
     @RequestMapping(value = "/shows",method = RequestMethod.GET)
-    public String showStudent(@RequestParam(value = "pNum",defaultValue = "1")Integer pNum, Model model){
+    public String showStudent(@RequestParam(value = "pNum",defaultValue = "1")Integer pNum,
+                              @RequestParam(value = "keyWord",required = false) String keyWord, Model model){
         PageHelper.startPage(pNum, 15);
         List<Student> students = studentService.getStudentContainGrade();
 
@@ -117,19 +118,4 @@ public class StudentHandler {
         return "login";
     }
 
-//    @ResponseBody
-    @RequestMapping(value = "/search",method = RequestMethod.GET)
-    public String search(@RequestParam(value = "keyWord") String keyWord,Model model){
-        System.out.println(keyWord);
-        List<Student> students = studentService.getStudentContainGradeSearch(keyWord);
-        if (students.size()>0){
-
-        }
-        System.out.println("student:"+students);
-        PageInfo<Student> pageInfo = new PageInfo <>(students,10);
-        System.out.println(pageInfo);
-        model.addAttribute("pages", students);
-        return "redirect:/shows";
-//        return "forward:/shows";
-    }
 }
