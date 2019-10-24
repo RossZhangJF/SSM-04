@@ -15,6 +15,14 @@
 </head>
 <body>
     <div class="container">
+        <div class="container-fluid">
+            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#uploadModal">
+                <%--<img src="static/upload/img/i03.png" id="img" class="img-circle">--%>
+                <img src="${avator.imgUrl}" id="img" class="img-circle">
+                <%--<img src="upload/i03.png" id="img" class="img-circle">--%>
+            </button>
+            <jsp:include page="common/upload.jsp"></jsp:include>
+        </div>
         <div class="row">
             <div class="col-md-3"><h1>学生信息</h1></div>
             <div class="col-md-4 col-md-offset-5">

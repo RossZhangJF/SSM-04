@@ -2,18 +2,26 @@ package com.ross.control;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.ross.entry.Avator;
 import com.ross.entry.Student;
 import com.ross.service.impl.GradeServiceImpl;
 import com.ross.service.impl.StudentServiceImpl;
+import com.ross.utils.UploadUtil;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class StudentHandler {
@@ -26,6 +34,8 @@ public class StudentHandler {
     public void Student(Model model){
         model.addAttribute("student", new Student());
         model.addAttribute("grade", gradeService.getList());
+        Avator avator=new Avator(1,"static/upload/img/i03.png",1);
+        model.addAttribute("avator",avator);
     }
 
     @RequestMapping(value = "/showGrade")
@@ -122,4 +132,36 @@ public class StudentHandler {
         return "login";
     }
 
+    @RequestMapping(value = "/upload",method = RequestMethod.POST)
+    public String uploadImg(HttpServletRequest request,
+                            @RequestParam("fileImg") MultipartFile fileImg){
+        /*将上传的图片写入到指定的路径下*/
+        if (fileImg!=null){
+            /*得到绝对路径*/
+            String path=request.getServletContext().getRealPath("/upload/");
+            /*获取上传文件的全部名称*/
+            String fileName=fileImg.getOriginalFilename();
+            //获取上传文件的后缀名
+            String suffix=fileName.substring(fileName.lastIndexOf("."));
+            //重新指定文件名称
+            String realImgName= UUID.randomUUID().toString()+suffix;
+            // 创建File对象,注意这里不是创建一个目录或一个文件,你可以理解为是
+            // 获取指定目录中文件的管理权限(增改删除判断等 . . .)
+            File fileTemp=new File(path);
+            if (!fileTemp.exists()){
+                // 创建以此抽象路径名命名的目录,注意mkdir()只能创建一级目录,所以它的父级目录必须存在
+                fileTemp.mkdir();
+            }
+            File file=new File(path+"\\"+realImgName);
+//            File file=new File(path+realImgName);
+            System.out.println("在指定路径创建："+file);
+            try {
+                fileImg.transferTo(file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            request.setAttribute("uploadImg", realImgName);
+        }
+        return "success";
+    }
 }
